@@ -393,6 +393,46 @@
     renderStories();
   }
 
+  /* ---------- gün rollover (yerel gece yarısı) ----------
+   * Sayfa açıkken etkileşim beklemeden: "Bugün ateşlendi" kilitleri açılır,
+   * seri ve çiçek ışıması yeni güne göre güncellenir.
+   * Arka planda timer throttle olursa visibility/focus ile yakalanır. */
+
+  var knownDay = todayStr();
+  var dayTimer = null;
+
+  function msUntilNextLocalMidnight() {
+    var now = new Date();
+    var next = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1);
+    return Math.max(0, next.getTime() - now.getTime());
+  }
+
+  function onDayChange() {
+    knownDay = todayStr();
+    renderAll();
+    scheduleDayRollover();
+  }
+
+  function scheduleDayRollover() {
+    if (dayTimer) clearTimeout(dayTimer);
+    // Gece yarısından biraz sonra ateşle — sınırda erken tetiklenmeyi önler.
+    var delay = msUntilNextLocalMidnight() + 50;
+    dayTimer = setTimeout(function () {
+      if (todayStr() !== knownDay) onDayChange();
+      else scheduleDayRollover();
+    }, delay);
+  }
+
+  function checkDayRollover() {
+    if (todayStr() !== knownDay) onDayChange();
+  }
+
+  document.addEventListener("visibilitychange", function () {
+    if (document.visibilityState === "visible") checkDayRollover();
+  });
+  window.addEventListener("focus", checkDayRollover);
+
   renderScienceNote();
   renderAll();
+  scheduleDayRollover();
 })();
