@@ -14,9 +14,9 @@ Geçmiş koşullar geçerli değil; geçerli olan tek şey bugün hangi yolu ate
 
 ## Canlı
 
-https://ebruozpolat.github.io/Rewire/
+https://rewire-daily-practice.netlify.app/
 
-GitHub Pages — `main` dalının kökünden yayınlanır. `main`'e her push otomatik günceller.
+Netlify production. Yerelde `npx netlify deploy --prod` ile yeniden yayınlanır; GitHub `main` ile de bağlanabilir.
 
 ## Çalıştırma
 
