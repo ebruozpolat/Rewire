@@ -12,6 +12,12 @@ Geçmiş koşullar geçerli değil; geçerli olan tek şey bugün hangi yolu ate
 
 ---
 
+## Canlı
+
+https://ebruozpolat.github.io/Rewire/
+
+GitHub Pages — `main` dalının kökünden yayınlanır. `main`'e her push otomatik günceller.
+
 ## Çalıştırma
 
 Bağımlılık yok, derleme yok. `index.html` dosyasını tarayıcıda aç — hepsi bu.
