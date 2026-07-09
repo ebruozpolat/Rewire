@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Rewire — zihnindeki hikâyeyi yeniden yaz, her gün tekrar et.">
+  <title>rewire — geçmiş koşullar geçerli değil</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌱</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&family=Karla:wght@300..700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header class="topbar">
+    <div class="brand">
+      <span class="brand-mark">rewire</span>
+      <span class="brand-tag">geçmiş koşullar geçerli değil</span>
+    </div>
+    <div class="streak" id="streak" title="Kesintisiz pratik günlerin">
+      <span class="streak-flame">🔥</span>
+      <span class="streak-count" id="streak-count">0</span>
+      <span class="streak-label">gün</span>
+    </div>
+  </header>
+
+  <main>
+    <!-- Rotating science note -->
+    <section class="science-note" id="science-note" aria-live="polite">
+      <span class="science-icon">🧠</span>
+      <p id="science-text"></p>
+    </section>
+
+    <!-- Mind garden -->
+    <section class="garden-wrap" aria-label="Zihin bahçesi">
+      <svg id="garden" viewBox="0 0 800 300" preserveAspectRatio="xMidYMax meet" role="img" aria-label="Hikâyelerinin bahçesi"></svg>
+      <p class="garden-empty" id="garden-empty">Bahçen henüz boş. İlk hikâyeni dik. 🌱</p>
+    </section>
+
+    <!-- New story button / form -->
+    <section class="composer" id="composer">
+      <button class="btn btn-plant-toggle" id="btn-new-story">✍️ Yeni bir hikâye yeniden yaz</button>
+
+      <form class="rewrite-form hidden" id="rewrite-form">
+        <div class="form-step">
+          <label for="old-story">
+            <span class="step-num">1</span> Eski hikâye
+            <small>Zihninde tekrar eden cümleyi olduğu gibi dök.</small>
+          </label>
+          <textarea id="old-story" rows="2" maxlength="280"
+            placeholder="&quot;Başladığım hiçbir şeyi bitiremiyorum.&quot;" required></textarea>
+        </div>
+
+        <div class="form-step">
+          <label for="new-story">
+            <span class="step-num">2</span> Yeni hikâye
+            <small>Şimdiki zamanda, inandırıcı ve sana ait bir cümle.</small>
+          </label>
+          <textarea id="new-story" rows="2" maxlength="280"
+            placeholder="&quot;Ben önemli olanı bitiren biriyim — her gün küçük bir adım.&quot;" required></textarea>
+        </div>
+
+        <div class="form-actions">
+          <button type="button" class="btn btn-ghost" id="btn-cancel">Vazgeç</button>
+          <button type="submit" class="btn btn-primary">🌱 Dik</button>
+        </div>
+      </form>
+    </section>
+
+    <!-- Story cards -->
+    <section class="stories" id="stories" aria-label="Hikâyelerin"></section>
+  </main>
+
+  <footer>
+    <p>rewire · birlikte ateşlenen nöronlar birlikte bağlanır</p>
+  </footer>
+
+  <!-- Repeat (conscious firing) modal -->
+  <div class="modal-backdrop hidden" id="repeat-modal" role="dialog" aria-modal="true" aria-labelledby="repeat-story-text">
+    <div class="modal">
+      <p class="modal-hint">Derin bir nefes al. Cümleyi içinden — istersen sesli — oku:</p>
+      <p class="modal-story" id="repeat-story-text"></p>
+      <div class="modal-actions">
+        <button class="btn btn-ghost" id="btn-repeat-cancel">Şimdi değil</button>
+        <button class="btn btn-primary" id="btn-repeat-confirm">⚡ Ateşle</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

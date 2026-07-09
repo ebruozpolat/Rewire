@@ -1,0 +1,353 @@
+/* rewire — gece bahçesi */
+
+:root {
+  --ink: #0D0A1C;            /* mürekkep moru — gece zemini */
+  --ink-soft: #16112B;
+  --ink-card: #1B1533;
+  --gold: #D9BA79;           /* şampanya altını — ateşlenen sinaps */
+  --gold-dim: rgba(217, 186, 121, 0.35);
+  --sage: #9CC79B;           /* adaçayı yeşili — büyüme */
+  --lavender: #8F86AE;       /* lavanta grisi — ikincil metin */
+  --text: #EDE9F4;
+  --danger: #C78A8A;
+  --radius: 14px;
+  --font-story: "Fraunces", Georgia, serif;
+  --font-ui: "Karla", system-ui, sans-serif;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background:
+    radial-gradient(1200px 500px at 50% -10%, #1D1440 0%, transparent 60%),
+    var(--ink);
+  color: var(--text);
+  font-family: var(--font-ui);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  line-height: 1.55;
+}
+
+main {
+  width: min(720px, 92vw);
+  margin: 0 auto;
+  flex: 1;
+}
+
+.hidden { display: none !important; }
+
+/* ---------- top bar ---------- */
+
+.topbar {
+  width: min(720px, 92vw);
+  margin: 0 auto;
+  padding: 1.6rem 0 1rem;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+}
+
+.brand-mark {
+  font-family: var(--font-story);
+  font-weight: 600;
+  font-size: 1.7rem;
+  letter-spacing: 0.02em;
+  color: var(--gold);
+}
+
+.brand-tag {
+  display: block;
+  font-size: 0.78rem;
+  color: var(--lavender);
+  letter-spacing: 0.06em;
+}
+
+.streak {
+  display: flex;
+  align-items: baseline;
+  gap: 0.35rem;
+  background: var(--ink-soft);
+  border: 1px solid rgba(217, 186, 121, 0.25);
+  border-radius: 999px;
+  padding: 0.35rem 0.9rem;
+}
+
+.streak-count {
+  font-weight: 700;
+  font-size: 1.15rem;
+  color: var(--gold);
+}
+
+.streak-label { font-size: 0.8rem; color: var(--lavender); }
+
+/* ---------- science note ---------- */
+
+.science-note {
+  display: flex;
+  gap: 0.7rem;
+  align-items: flex-start;
+  background: rgba(143, 134, 174, 0.08);
+  border-left: 3px solid var(--lavender);
+  border-radius: 0 var(--radius) var(--radius) 0;
+  padding: 0.8rem 1rem;
+  margin-bottom: 1.4rem;
+  font-size: 0.9rem;
+  color: var(--lavender);
+}
+
+.science-note strong { color: var(--text); font-weight: 600; }
+
+/* ---------- garden ---------- */
+
+.garden-wrap {
+  position: relative;
+  background:
+    radial-gradient(600px 220px at 50% 110%, rgba(156, 199, 155, 0.10) 0%, transparent 70%),
+    var(--ink-soft);
+  border: 1px solid rgba(143, 134, 174, 0.18);
+  border-radius: var(--radius);
+  overflow: hidden;
+  margin-bottom: 1.6rem;
+}
+
+#garden { display: block; width: 100%; height: auto; }
+
+.garden-empty {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--lavender);
+  font-size: 0.95rem;
+  pointer-events: none;
+}
+
+@keyframes fire-pulse {
+  0%   { opacity: 0.35; }
+  50%  { opacity: 1; }
+  100% { opacity: 0.35; }
+}
+
+.flower-glow { animation: fire-pulse 4s ease-in-out infinite; }
+
+@keyframes twinkle {
+  0%, 100% { opacity: 0.25; }
+  50%      { opacity: 0.9; }
+}
+
+.star { animation: twinkle 5s ease-in-out infinite; }
+
+/* ---------- composer ---------- */
+
+.composer { margin-bottom: 1.8rem; }
+
+.btn {
+  font-family: var(--font-ui);
+  font-size: 0.95rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 999px;
+  padding: 0.65rem 1.3rem;
+  cursor: pointer;
+  transition: transform 0.12s ease, filter 0.12s ease, opacity 0.12s ease;
+}
+
+.btn:hover:not(:disabled) { transform: translateY(-1px); filter: brightness(1.08); }
+.btn:disabled { cursor: default; opacity: 0.45; }
+
+.btn-primary { background: var(--gold); color: var(--ink); }
+
+.btn-ghost {
+  background: transparent;
+  color: var(--lavender);
+  border: 1px solid rgba(143, 134, 174, 0.4);
+}
+
+.btn-plant-toggle {
+  width: 100%;
+  background: var(--ink-card);
+  color: var(--sage);
+  border: 1px dashed rgba(156, 199, 155, 0.45);
+  padding: 0.9rem;
+}
+
+.rewrite-form {
+  margin-top: 1rem;
+  background: var(--ink-card);
+  border: 1px solid rgba(143, 134, 174, 0.2);
+  border-radius: var(--radius);
+  padding: 1.2rem 1.3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.form-step label {
+  display: block;
+  font-weight: 700;
+  margin-bottom: 0.45rem;
+}
+
+.form-step small {
+  display: block;
+  font-weight: 400;
+  color: var(--lavender);
+  font-size: 0.82rem;
+}
+
+.step-num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.4rem;
+  height: 1.4rem;
+  border-radius: 50%;
+  background: var(--gold-dim);
+  color: var(--gold);
+  font-size: 0.8rem;
+  margin-right: 0.3rem;
+}
+
+textarea {
+  width: 100%;
+  background: var(--ink-soft);
+  border: 1px solid rgba(143, 134, 174, 0.3);
+  border-radius: 10px;
+  color: var(--text);
+  font-family: var(--font-story);
+  font-size: 1rem;
+  padding: 0.7rem 0.85rem;
+  resize: vertical;
+}
+
+textarea:focus {
+  outline: none;
+  border-color: var(--gold);
+  box-shadow: 0 0 0 3px rgba(217, 186, 121, 0.15);
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.6rem;
+}
+
+/* ---------- story cards ---------- */
+
+.stories {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 2.5rem;
+}
+
+.story-card {
+  position: relative;
+  background: var(--ink-card);
+  border: 1px solid rgba(143, 134, 174, 0.18);
+  border-radius: var(--radius);
+  padding: 1.1rem 1.2rem 1rem;
+}
+
+.story-card.just-fired {
+  border-color: var(--gold);
+  box-shadow: 0 0 24px rgba(217, 186, 121, 0.25);
+}
+
+.story-old {
+  font-family: var(--font-story);
+  font-style: italic;
+  color: var(--lavender);
+  text-decoration: line-through;
+  text-decoration-color: rgba(143, 134, 174, 0.7);
+  font-size: 0.92rem;
+  margin-bottom: 0.4rem;
+}
+
+.story-new {
+  font-family: var(--font-story);
+  font-size: 1.18rem;
+  font-weight: 500;
+  color: var(--text);
+  margin-bottom: 0.8rem;
+}
+
+.story-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.8rem;
+  flex-wrap: wrap;
+}
+
+.story-stats {
+  font-size: 0.8rem;
+  color: var(--sage);
+}
+
+.btn-repeat { background: rgba(156, 199, 155, 0.15); color: var(--sage); border: 1px solid rgba(156, 199, 155, 0.4); }
+.btn-repeat.done { background: transparent; color: var(--lavender); border-color: rgba(143, 134, 174, 0.3); }
+
+.btn-release {
+  position: absolute;
+  top: 0.55rem;
+  right: 0.7rem;
+  background: none;
+  border: none;
+  color: rgba(143, 134, 174, 0.55);
+  font-size: 1rem;
+  cursor: pointer;
+  padding: 0.2rem;
+  line-height: 1;
+}
+
+.btn-release:hover { color: var(--danger); }
+
+/* ---------- modal ---------- */
+
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(13, 10, 28, 0.85);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 20;
+}
+
+.modal {
+  width: min(480px, 90vw);
+  background: var(--ink-card);
+  border: 1px solid rgba(217, 186, 121, 0.35);
+  border-radius: var(--radius);
+  padding: 1.6rem 1.5rem;
+  text-align: center;
+}
+
+.modal-hint { color: var(--lavender); font-size: 0.88rem; margin-bottom: 1rem; }
+
+.modal-story {
+  font-family: var(--font-story);
+  font-size: 1.35rem;
+  color: var(--gold);
+  margin-bottom: 1.4rem;
+}
+
+.modal-actions { display: flex; justify-content: center; gap: 0.8rem; }
+
+/* ---------- footer ---------- */
+
+footer {
+  text-align: center;
+  padding: 1.2rem 0 1.6rem;
+  color: rgba(143, 134, 174, 0.6);
+  font-size: 0.78rem;
+}
+
+@media (max-width: 520px) {
+  .topbar { flex-direction: column; gap: 0.6rem; align-items: flex-start; }
+  .story-meta { flex-direction: column; align-items: flex-start; }
+}
