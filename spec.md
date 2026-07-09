@@ -117,14 +117,14 @@ Six hardcoded notes (Hebb's rule, myelination, spaced repetition, writing, atten
 - Garden SVG: `role="img"` + aria-label; per-plant `<title>`.
 - All user text rendered via `textContent` (XSS-safe). Long words: none truncated — 280-char cap keeps cards sane.
 - Multiple tabs: last write wins (acceptable for v1).
-- Day rollover while the page is open: UI refreshes lazily on next interaction (render reads `todayStr()` fresh each time).
+- Day rollover while the page is open: a `setTimeout` fires ~50ms after local midnight and calls `renderAll()` so repeat locks, streak, and flower glow update without interaction. `visibilitychange` / `focus` re-check the calendar day in case the timer was throttled in a background tab. Science note is not rotated on midnight (only on open).
 
 ## 8. Known v1 decisions / backlog ideas
 
 Deliberately out of scope in v1, natural next steps:
 
 1. **Release archive** — released stories vanish; could keep a "serbest bırakılanlar" list instead.
-2. **Day-rollover timer** — re-render at local midnight without interaction.
+2. ~~**Day-rollover timer**~~ — done: local-midnight `setTimeout` + visibility/focus re-check.
 3. **Export/import** — JSON download/upload of `rewire-state-v1` for device migration.
 4. **Longest-streak stat** and per-story milestones (7/21/66 days).
 5. **Reduced motion** — honor `prefers-reduced-motion` by disabling twinkle/pulse.
