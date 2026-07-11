@@ -2,3 +2,4 @@
 .netlify/
 .env
 *.log
+rewire-pwa.zip

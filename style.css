@@ -27,6 +27,7 @@ body {
   display: flex;
   flex-direction: column;
   line-height: 1.55;
+  padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
 }
 
 main {
@@ -337,6 +338,52 @@ textarea:focus {
 }
 
 .modal-actions { display: flex; justify-content: center; gap: 0.8rem; }
+
+/* ---------- PWA install tip ---------- */
+
+.install-tip {
+  position: fixed;
+  left: 16px;
+  right: 16px;
+  bottom: max(16px, env(safe-area-inset-bottom));
+  z-index: 50;
+  max-width: 608px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 16px;
+  background: var(--ink-card);
+  border: 1px solid var(--gold);
+  border-radius: var(--radius);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+  font-size: 0.88rem;
+  line-height: 1.45;
+  color: var(--text);
+}
+
+.install-tip.hidden { display: none; }
+
+.install-msg { flex: 1; }
+
+.install-btn {
+  flex: none;
+  padding: 0.45rem 0.9rem;
+  font-size: 0.85rem;
+  white-space: nowrap;
+}
+
+.install-close {
+  flex: none;
+  border: none;
+  background: transparent;
+  color: var(--lavender);
+  font-size: 1rem;
+  padding: 4px 8px;
+  cursor: pointer;
+}
+
+.install-close:hover { color: var(--text); }
 
 /* ---------- footer ---------- */
 
