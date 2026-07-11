@@ -18,9 +18,18 @@ https://rewire-daily-practice.netlify.app/
 
 Netlify production. Yerelde `npx netlify deploy --prod` ile yeniden yayınlanır; GitHub `main` ile de bağlanabilir.
 
+### Telefona yükle (PWA)
+
+- **Android (Chrome):** siteyi aç → banner’daki *Yükle*, veya ⋮ → *Ana ekrana ekle*.
+- **iPhone (Safari):** Paylaş → *Ana Ekrana Ekle*.
+
+Yüklendikten sonra tam ekran açılır, çevrimdışı çalışır; bahçen cihazında kalır.
+
 ## Çalıştırma
 
 Bağımlılık yok, derleme yok. `index.html` dosyasını tarayıcıda aç — hepsi bu.
+
+> Service worker ve yükleme istemi için **HTTPS** gerekir (yerel `localhost` da çalışır). Netlify bunu otomatik sağlar.
 
 ```bash
 # İstersen küçük bir yerel sunucuyla:
@@ -83,6 +92,7 @@ Bahçen kalıcıdır: hikâyelerin, tekrarların ve serin oturumlar arasında sa
 - 🔥 Gün serisi takibi
 - 🧠 Her açılışta dönen "neden işe yarıyor" bilim notları
 - 💾 Oturumlar arası kalıcı kayıt
+- 📱 Ana ekrana yükle (PWA) — çevrimdışı app shell
 - ✕ Artık taşımak istemediğin hikâyeyi serbest bırakma
 
 ---

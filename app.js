@@ -432,6 +432,66 @@
   });
   window.addEventListener("focus", checkDayRollover);
 
+  /* ---------- PWA: service worker + install tip ---------- */
+
+  var deferredPrompt = null;
+  var installTip = $("install-tip");
+  var installMsg = $("install-msg");
+  var btnInstall = $("btn-install");
+  var btnInstallClose = $("btn-install-close");
+  var standalone =
+    (window.matchMedia && window.matchMedia("(display-mode: standalone)").matches) ||
+    navigator.standalone === true;
+  var installDismissed = false;
+  try { installDismissed = !!localStorage.getItem("rewire-install-dismissed"); } catch (e) {}
+  var isIOS = /iphone|ipad|ipod/i.test(navigator.userAgent || "");
+
+  function showInstallTip() {
+    if (!installTip || standalone || installDismissed) return;
+    installTip.classList.remove("hidden");
+  }
+
+  if (isIOS) {
+    if (installMsg) {
+      installMsg.textContent = "Yüklemek için: Paylaş düğmesine, sonra “Ana Ekrana Ekle”ye dokun.";
+    }
+    if (btnInstall) btnInstall.classList.add("hidden");
+    showInstallTip();
+  }
+
+  window.addEventListener("beforeinstallprompt", function (e) {
+    e.preventDefault();
+    deferredPrompt = e;
+    if (btnInstall) btnInstall.classList.remove("hidden");
+    if (installMsg) {
+      installMsg.textContent = "Tam uygulama deneyimi için rewire’ı ana ekranına ekle.";
+    }
+    showInstallTip();
+  });
+
+  if (btnInstall) {
+    btnInstall.addEventListener("click", function () {
+      if (!deferredPrompt) return;
+      deferredPrompt.prompt();
+      deferredPrompt.userChoice.then(function () {
+        deferredPrompt = null;
+        if (installTip) installTip.classList.add("hidden");
+      });
+    });
+  }
+
+  if (btnInstallClose) {
+    btnInstallClose.addEventListener("click", function () {
+      if (installTip) installTip.classList.add("hidden");
+      try { localStorage.setItem("rewire-install-dismissed", "1"); } catch (e) {}
+      installDismissed = true;
+    });
+  }
+
+  if ("serviceWorker" in navigator) {
+    navigator.serviceWorker.register("./sw.js").catch(function () { /* offline register fail ok */ });
+  }
+
   renderScienceNote();
   renderAll();
   scheduleDayRollover();

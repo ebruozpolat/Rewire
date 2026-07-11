@@ -1,0 +1,16 @@
+{
+  "name": "rewire — geçmiş koşullar geçerli değil",
+  "short_name": "rewire",
+  "description": "Zihnindeki hikâyeyi yeniden yaz. Her gün tekrar et. Yeni yol, eskisini geride bıraksın.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#0D0A1C",
+  "theme_color": "#0D0A1C",
+  "icons": [
+    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}

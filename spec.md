@@ -8,8 +8,9 @@
 ## 1. Overview
 
 - **Type:** Dependency-free single-page web app. No build step, no framework, no server, no accounts.
-- **Run:** Open `index.html` in a browser, or `python3 -m http.server 8000`.
+- **Run:** Open `index.html` in a browser, or `python3 -m http.server 8000` (HTTPS/`localhost` needed for the service worker).
 - **Persistence:** Browser `localStorage` only.
+- **PWA:** Installable via `manifest.webmanifest` + `sw.js`; offline app shell.
 - **UI language:** Turkish.
 - **Status:** Fully implemented and verified end-to-end (plant → repeat → streak → reload persistence → release) via headless Chromium.
 
@@ -17,9 +18,12 @@
 
 | File | Role |
 |---|---|
-| `index.html` | Markup: header, science note, garden SVG, composer form, story cards, repeat modal |
+| `index.html` | Markup: header, science note, garden SVG, composer form, story cards, repeat modal, install tip |
 | `style.css` | All styling; night-garden theme via CSS custom properties |
 | `app.js` | All logic in a single IIFE, ES5-compatible style, no imports |
+| `manifest.webmanifest` | PWA install metadata (name, icons, theme) |
+| `sw.js` | Service worker — cache-first app shell for offline |
+| `icon-192.png`, `icon-512.png`, `apple-touch-icon.png` | App / home-screen icons |
 | `README.md` | Product/concept documentation (Turkish) |
 | `spec.md` | This file |
 
@@ -128,7 +132,7 @@ Deliberately out of scope in v1, natural next steps:
 3. **Export/import** — JSON download/upload of `rewire-state-v1` for device migration.
 4. **Longest-streak stat** and per-story milestones (7/21/66 days).
 5. **Reduced motion** — honor `prefers-reduced-motion` by disabling twinkle/pulse.
-6. **PWA** — manifest + service worker for offline install (fonts already degrade).
+6. ~~**PWA**~~ — done: `manifest.webmanifest`, `sw.js` (cache `rewire-v3`), icons, install tip (Android `beforeinstallprompt` + iOS Share hint). Bump `CACHE` in `sw.js` when shipping shell changes so installed clients refresh.
 7. **Repeat reminder** — optional notification.
 8. i18n — strings are inline Turkish; extract to a dict if English is ever needed.
 
